@@ -2,11 +2,270 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
-  <title>Nilys Entreprenad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nilys Entreprenad — Renovering &amp; Byggservice</title>
+  <meta name="description" content="Nilys Entreprenad utför renoveringar med hög kvalitet — badrum, kök, målning, golv och totalrenoveringar. Kontakta oss för en kostnadsfri offert.">
+  <meta property="og:title" content="Nilys Entreprenad — Renovering & Byggservice">
+  <meta property="og:description" content="Renoveringar med hög kvalitet — badrum, kök, målning, golv och totalrenoveringar.">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://nilysentreprenad.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23141414'/><text x='50' y='70' font-size='58' font-family='Arial' font-weight='bold' text-anchor='middle' fill='%23f4f4f2'>N</text></svg>">
 </head>
 <body>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="top">
+    <div class="wrap nav-inner">
+      <a href="#top" class="wordmark">Nilys Entreprenad<sup>®</sup></a>
+      <nav class="nav-links">
+        <a href="#tjanster" class="nav-link">Tjänster</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#om-oss" class="nav-link">Om oss</a>
+        <a href="#kontakt" class="nav-link nav-cta">Kontakt</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Meny" aria-expanded="false">
+        <span class="nav-toggle-label">Meny</span>
+        <span class="nav-toggle-icon"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MOBILMENY ===== -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <nav class="menu-links">
+      <a href="#tjanster"><span>01</span>Tjänster</a>
+      <a href="#process"><span>02</span>Process</a>
+      <a href="#om-oss"><span>03</span>Om oss</a>
+      <a href="#kontakt"><span>04</span>Kontakt</a>
+    </nav>
+    <div class="menu-foot">
+      <a href="mailto:info@nilysentreprenad.com">info@nilysentreprenad.com</a>
+      <a href="tel:+46701234567">070-123 45 67</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-meta">
+          <span>Renovering &amp; byggservice</span>
+          <span>Stockholm, Sverige</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="line reveal">Vi bygger om,</span>
+          <span class="line reveal"><em>du flyttar in.</em></span>
+        </h1>
+        <div class="hero-foot">
+          <p class="hero-lead reveal">Badrum, kök och totalrenoveringar utförda med noggrant hantverk — fasta priser, hållna tidsplaner och garanti på allt arbete.</p>
+          <a href="#kontakt" class="link-arrow reveal">Få en kostnadsfri offert</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SIFFROR ===== -->
+    <section class="stats">
+      <div class="wrap stats-row">
+        <div class="stat reveal">
+          <span class="stat-num">100<sup>%</sup></span>
+          <span class="stat-label">Nöjda kunder</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num">24<sup>h</sup></span>
+          <span class="stat-label">Svarstid på förfrågningar</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num">50<sup>%</sup></span>
+          <span class="stat-label">ROT-avdrag på arbetskostnad</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TJÄNSTER ===== -->
+    <section class="section" id="tjanster">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="label">Tjänster</span>
+          <h2>Vad vi gör</h2>
+        </div>
+
+        <ul class="service-list">
+          <li class="service reveal">
+            <span class="service-index">01</span>
+            <h3 class="service-name">Badrumsrenovering</h3>
+            <p class="service-desc">Kompletta badrum från golv till tak. Tätskikt, kakel och installationer enligt branschregler.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </li>
+          <li class="service reveal">
+            <span class="service-index">02</span>
+            <h3 class="service-name">Köksrenovering</h3>
+            <p class="service-desc">Från nya luckor till helt nytt kök — smart planering och montering med precision.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </li>
+          <li class="service reveal">
+            <span class="service-index">03</span>
+            <h3 class="service-name">Totalrenovering</h3>
+            <p class="service-desc">Hela bostaden i ett projekt. Vi samordnar alla moment, du slipper jaga hantverkare.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </li>
+          <li class="service reveal">
+            <span class="service-index">04</span>
+            <h3 class="service-name">Målning &amp; tapetsering</h3>
+            <p class="service-desc">Släta väggar, skarpa linjer och rätt kulör — in- och utvändigt.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </li>
+          <li class="service reveal">
+            <span class="service-index">05</span>
+            <h3 class="service-name">Golvläggning</h3>
+            <p class="service-desc">Parkett, laminat, klinker eller vinyl. Golv som håller — och ser ut därefter.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </li>
+          <li class="service reveal">
+            <span class="service-index">06</span>
+            <h3 class="service-name">Snickeri &amp; finish</h3>
+            <p class="service-desc">Platsbyggda lösningar, lister och detaljerna som lyfter helheten.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section section-tint" id="process">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="label">Process</span>
+          <h2>Från idé till<br>färdigt resultat</h2>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Kontakt</h3>
+            <p>Berätta om ditt projekt. Vi återkommer inom ett dygn och bokar ett kostnadsfritt hembesök.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">02</span>
+            <h3>Offert</h3>
+            <p>Tydlig offert med fast pris och tidsplan. Inga dolda kostnader, inga överraskningar.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">03</span>
+            <h3>Utförande</h3>
+            <p>Noggrant arbete, löpande uppdateringar — och vi städar efter oss varje dag.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">04</span>
+            <h3>Besiktning</h3>
+            <p>Vi går igenom resultatet tillsammans. Du är nöjd, annars är vi inte klara.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== OM OSS ===== -->
+    <section class="section" id="om-oss">
+      <div class="wrap about">
+        <div class="about-media reveal">
+          <figure class="about-img"></figure>
+          <figcaption class="about-caption">
+            <span>Nilys Entreprenad</span>
+            <span>Est. Stockholm</span>
+          </figcaption>
+        </div>
+        <div class="about-body">
+          <span class="label reveal">Om oss</span>
+          <h2 class="reveal">Hantverk<br>med stolthet</h2>
+          <p class="reveal">Nilys Entreprenad drivs av Nily — en hantverkare med öga för detaljer och gedigen erfarenhet av renovering. Vi tror på raka besked, schyssta priser och att lämna arbetsplatsen snyggare än vi fann den.</p>
+          <ul class="facts reveal">
+            <li>F-skatt &amp; försäkring</li>
+            <li>ROT-avdrag — vi sköter pappersarbetet</li>
+            <li>Fasta priser, hållna tidsplaner</li>
+            <li>Referenser från tidigare projekt</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+      <div class="wrap">
+        <a href="#kontakt" class="cta-link reveal">
+          <span class="cta-small">Redo att komma igång?</span>
+          <span class="cta-big">Starta ditt projekt <span class="cta-arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== KONTAKT ===== -->
+    <section class="section" id="kontakt">
+      <div class="wrap contact">
+        <div class="contact-intro">
+          <span class="label reveal">Kontakt</span>
+          <h2 class="reveal">Hör av dig</h2>
+          <p class="reveal">Ring, mejla eller skicka en förfrågan — vi svarar oftast samma dag.</p>
+          <div class="contact-details reveal">
+            <a href="mailto:info@nilysentreprenad.com">info@nilysentreprenad.com</a>
+            <a href="tel:+46701234567">070-123 45 67</a>
+            <span>Stockholm med omnejd</span>
+          </div>
+        </div>
+
+        <form class="form reveal" action="mailto:info@nilysentreprenad.com" method="post" enctype="text/plain">
+          <div class="form-grid">
+            <label>
+              <span>Namn</span>
+              <input type="text" name="namn" placeholder="Ditt namn" required>
+            </label>
+            <label>
+              <span>Telefon</span>
+              <input type="tel" name="telefon" placeholder="Ditt nummer">
+            </label>
+          </div>
+          <label>
+            <span>E-post</span>
+            <input type="email" name="epost" placeholder="din@epost.se" required>
+          </label>
+          <label>
+            <span>Projekt</span>
+            <textarea name="meddelande" rows="4" placeholder="Beskriv vad du vill ha hjälp med" required></textarea>
+          </label>
+          <button type="submit" class="btn-submit">Skicka förfrågan <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <nav class="footer-nav">
+          <a href="#tjanster">Tjänster</a>
+          <a href="#process">Process</a>
+          <a href="#om-oss">Om oss</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+        <div class="footer-contact">
+          <a href="mailto:info@nilysentreprenad.com">info@nilysentreprenad.com</a>
+          <a href="tel:+46701234567">070-123 45 67</a>
+        </div>
+      </div>
+      <p class="footer-mark" aria-hidden="true">NILYS</p>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Nilys Entreprenad</span>
+        <span>Renovering &amp; byggservice — Stockholm</span>
+        <a href="#top">Till toppen ↑</a>
+      </div>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
