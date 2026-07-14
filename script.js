@@ -83,7 +83,7 @@ document.addEventListener('keydown', e => {
 });
 
 // E-postknappar: mailto kräver ett e-postprogram, så vi kopierar även
-// adressen till urklipp och visar en bekräftelse – då fungerar knappen alltid.
+// adressen till urklipp och visar en bekräftelse. Då fungerar knappen alltid.
 const toast = document.createElement('div');
 toast.className = 'toast';
 document.body.appendChild(toast);

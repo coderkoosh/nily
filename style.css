@@ -1,16 +1,16 @@
 /* ============================================================
-   Nilys Entreprenad – gråskala + bygg/renoverings-tema
+   Nilys Entreprenad, tema i grått med amber accent
    ============================================================ */
 
 :root {
-  --charcoal: #1d242b;      /* mörkast – header, footer, knappar */
+  --charcoal: #1d242b;      /* mörkast: header, footer, knappar */
   --steel: #2e3842;         /* mörkgrå sektioner */
   --concrete: #f2f3f4;      /* ljusgrå sektionsbakgrund */
   --concrete-dark: #e2e5e7;
   --line: #d5d9dd;
   --text: #333a41;
   --muted: #6b7580;
-  --accent: #f0a028;        /* varningsgul/amber – byggkänsla */
+  --accent: #f0a028;        /* varningsgul/amber, byggkänsla */
   --accent-dark: #d18a15;
   --white: #ffffff;
   --radius: 10px;
@@ -136,16 +136,6 @@ h1, h2, h3 {
   gap: 10px;
   text-decoration: none;
 }
-.logo-mark {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  background: var(--accent);
-  color: var(--charcoal);
-  border-radius: 8px;
-}
-.logo-mark svg { width: 22px; height: 22px; }
 .logo-text {
   font-family: var(--font-head);
   font-weight: 700;
@@ -334,6 +324,8 @@ h1, h2, h3 {
 }
 .service-card--more h3 { color: var(--white); }
 .service-card--more p { color: #aeb6bd; }
+.service-card--more .btn-dark { background: var(--accent); color: var(--charcoal); }
+.service-card--more .btn-dark:hover { background: #ffb23a; }
 
 /* ---------- Projekt / Innan & Efter ---------- */
 .project {
@@ -644,7 +636,6 @@ h1, h2, h3 {
     border-top: 1px solid rgba(255,255,255,.07);
   }
   .site-nav .nav-cta {
-    border-radius: 0;
     text-align: center;
     margin: 12px 6% 18px;
     border-radius: 6px;
