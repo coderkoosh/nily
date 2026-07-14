@@ -32,7 +32,8 @@ const observer = new IntersectionObserver(
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
 // Kontaktformulär – öppnar användarens e-postklient med ifyllt meddelande
-document.getElementById('contactForm').addEventListener('submit', (e) => {
+const contactForm = document.getElementById('contactForm');
+if (contactForm) contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(e.target);
   const subject = encodeURIComponent('Offertförfrågan från ' + data.get('name'));
