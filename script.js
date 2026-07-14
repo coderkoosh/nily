@@ -82,5 +82,32 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
 });
 
+// E-postknappar: mailto kräver ett e-postprogram, så vi kopierar även
+// adressen till urklipp och visar en bekräftelse – då fungerar knappen alltid.
+const toast = document.createElement('div');
+toast.className = 'toast';
+document.body.appendChild(toast);
+let toastTimer;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+  link.addEventListener('click', () => {
+    const address = link.href.replace('mailto:', '');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(address)
+        .then(() => showToast('E-postadressen är kopierad: ' + address))
+        .catch(() => showToast('E-post: ' + address));
+    } else {
+      showToast('E-post: ' + address);
+    }
+  });
+});
+
 // Årtal i footern
 document.getElementById('year').textContent = new Date().getFullYear();
