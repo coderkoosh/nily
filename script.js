@@ -1,5 +1,8 @@
 // ===== Nilys Entreprenad =====
 
+// Talar om för CSS:en att JS är igång (annars visas allt innehåll direkt)
+document.documentElement.classList.add('js');
+
 // Mobilmeny
 const navToggle = document.getElementById('navToggle');
 const siteNav = document.getElementById('siteNav');
@@ -18,8 +21,33 @@ siteNav.querySelectorAll('a').forEach(link => {
   });
 });
 
+// Skugga under headern när sidan är skrollad
+const header = document.querySelector('.site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Markera aktiv sektion i menyn medan man skrollar
+const navLinks = [...siteNav.querySelectorAll('a[href^="#"]')];
+const spySections = navLinks
+  .map(link => document.querySelector(link.hash))
+  .filter(Boolean);
+
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link =>
+        link.classList.toggle('active', link.hash === '#' + entry.target.id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+spySections.forEach(section => spy.observe(section));
+
 // Scroll-reveal
+let revealDelivered = false;
 const observer = new IntersectionObserver(entries => {
+  revealDelivered = true;
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
@@ -30,42 +58,69 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Bildkaruseller i tjänstekorten (crossfade var 3,5 s)
+// Skyddsnät: om observern inte svarat inom 1,5 s visas allt direkt
+setTimeout(() => {
+  if (!revealDelivered) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+}, 1500);
+
+// Bildkaruseller i tjänstekorten: crossfade var 3,5 s,
+// pausar när muspekaren är över bilden och prickarna är klickbara
 document.querySelectorAll('[data-carousel]').forEach(media => {
   const imgs = media.querySelectorAll('img');
   if (imgs.length < 2) return;
 
   const dots = document.createElement('div');
   dots.className = 'carousel-dots';
+  let index = 0;
+
+  const show = i => {
+    imgs[index].classList.remove('is-active');
+    dots.children[index].classList.remove('on');
+    index = i;
+    imgs[index].classList.add('is-active');
+    dots.children[index].classList.add('on');
+  };
+
   imgs.forEach((_, i) => {
     const dot = document.createElement('i');
     if (i === 0) dot.classList.add('on');
+    dot.addEventListener('click', () => show(i));
     dots.appendChild(dot);
   });
   media.appendChild(dots);
 
-  let index = 0;
-  setInterval(() => {
-    imgs[index].classList.remove('is-active');
-    dots.children[index].classList.remove('on');
-    index = (index + 1) % imgs.length;
-    imgs[index].classList.add('is-active');
-    dots.children[index].classList.add('on');
-  }, 3500);
+  const start = () => setInterval(() => show((index + 1) % imgs.length), 3500);
+  let timer = start();
+  media.addEventListener('mouseenter', () => clearInterval(timer));
+  media.addEventListener('mouseleave', () => { timer = start(); });
 });
 
-// Lightbox för projektbilder
+// Lightbox med bläddring mellan alla projektbilder
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
 const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
 
-document.querySelectorAll('.project-gallery .shot img').forEach(img => {
-  img.parentElement.addEventListener('click', () => {
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-  });
+const allShots = [...document.querySelectorAll('.project-gallery .shot img')];
+let shotIndex = 0;
+
+function openLightbox(i) {
+  shotIndex = (i + allShots.length) % allShots.length;
+  const img = allShots[shotIndex];
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+  const badge = img.parentElement.querySelector('figcaption');
+  lightboxCaption.textContent = (badge ? badge.textContent + ': ' : '') + img.alt;
+  lightbox.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+allShots.forEach((img, i) => {
+  img.parentElement.addEventListener('click', () => openLightbox(i));
 });
 
 function closeLightbox() {
@@ -75,12 +130,24 @@ function closeLightbox() {
 }
 
 lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', e => { e.stopPropagation(); openLightbox(shotIndex - 1); });
+lightboxNext.addEventListener('click', e => { e.stopPropagation(); openLightbox(shotIndex + 1); });
 lightbox.addEventListener('click', e => {
   if (e.target === lightbox) closeLightbox();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  if (lightbox.hidden) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') openLightbox(shotIndex - 1);
+  if (e.key === 'ArrowRight') openLightbox(shotIndex + 1);
 });
+
+// Tillbaka till toppen-knappen
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+  toTop.classList.toggle('show', window.scrollY > 600);
+}, { passive: true });
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // E-postknappar: mailto kräver ett e-postprogram, så vi kopierar även
 // adressen till urklipp och visar en bekräftelse. Då fungerar knappen alltid.
