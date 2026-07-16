@@ -65,8 +65,8 @@ setTimeout(() => {
   }
 }, 1500);
 
-// Bildkaruseller i tjänstekorten: crossfade var 3,5 s,
-// pausar när muspekaren är över bilden och prickarna är klickbara
+// Bildkaruseller i tjänstekorten: crossfade var 3,5 s, pilar och
+// klickbara prickar, pausar vid hovring och går att svepa på mobil
 document.querySelectorAll('[data-carousel]').forEach(media => {
   const imgs = media.querySelectorAll('img');
   if (imgs.length < 2) return;
@@ -78,23 +78,53 @@ document.querySelectorAll('[data-carousel]').forEach(media => {
   const show = i => {
     imgs[index].classList.remove('is-active');
     dots.children[index].classList.remove('on');
-    index = i;
+    index = (i + imgs.length) % imgs.length;
     imgs[index].classList.add('is-active');
     dots.children[index].classList.add('on');
   };
 
+  const start = () => setInterval(() => show(index + 1), 3500);
+  let timer = start();
+  const restart = () => { clearInterval(timer); timer = start(); };
+
   imgs.forEach((_, i) => {
     const dot = document.createElement('i');
     if (i === 0) dot.classList.add('on');
-    dot.addEventListener('click', () => show(i));
+    dot.addEventListener('click', () => { show(i); restart(); });
     dots.appendChild(dot);
   });
   media.appendChild(dots);
 
-  const start = () => setInterval(() => show((index + 1) % imgs.length), 3500);
-  let timer = start();
+  const arrow = (cls, label, path) => {
+    const btn = document.createElement('button');
+    btn.className = 'carousel-arrow ' + cls;
+    btn.setAttribute('aria-label', label);
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="' + path + '"/></svg>';
+    media.appendChild(btn);
+    return btn;
+  };
+  arrow('prev', 'Föregående bild', 'm15 18-6-6 6-6')
+    .addEventListener('click', () => { show(index - 1); restart(); });
+  arrow('next', 'Nästa bild', 'm9 18 6-6-6-6')
+    .addEventListener('click', () => { show(index + 1); restart(); });
+
   media.addEventListener('mouseenter', () => clearInterval(timer));
-  media.addEventListener('mouseleave', () => { timer = start(); });
+  media.addEventListener('mouseleave', restart);
+
+  // Svep åt vänster/höger för att byta bild (finger eller mus)
+  let startX = null, startY = null;
+  media.addEventListener('dragstart', e => e.preventDefault());
+  media.addEventListener('pointerdown', e => { startX = e.clientX; startY = e.clientY; });
+  media.addEventListener('pointerup', e => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      show(dx < 0 ? index + 1 : index - 1);
+      restart();
+    }
+    startX = null;
+  });
 });
 
 // Lightbox med bläddring mellan alla projektbilder
@@ -114,7 +144,8 @@ function openLightbox(i) {
   lightboxImg.src = img.src;
   lightboxImg.alt = img.alt;
   const badge = img.parentElement.querySelector('figcaption');
-  lightboxCaption.textContent = (badge ? badge.textContent + ': ' : '') + img.alt;
+  lightboxCaption.textContent = (badge ? badge.textContent + ': ' : '') + img.alt
+    + ' · ' + (shotIndex + 1) + '/' + allShots.length;
   lightbox.hidden = false;
   document.body.style.overflow = 'hidden';
 }
@@ -132,7 +163,23 @@ function closeLightbox() {
 lightboxClose.addEventListener('click', closeLightbox);
 lightboxPrev.addEventListener('click', e => { e.stopPropagation(); openLightbox(shotIndex - 1); });
 lightboxNext.addEventListener('click', e => { e.stopPropagation(); openLightbox(shotIndex + 1); });
+
+// Svep i lightboxen för att bläddra (utan att råka stänga den)
+let lbStartX = null, lbStartY = null, lbSwiped = false;
+lightbox.addEventListener('dragstart', e => e.preventDefault());
+lightbox.addEventListener('pointerdown', e => { lbStartX = e.clientX; lbStartY = e.clientY; });
+lightbox.addEventListener('pointerup', e => {
+  if (lbStartX === null) return;
+  const dx = e.clientX - lbStartX;
+  const dy = e.clientY - lbStartY;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+    openLightbox(dx < 0 ? shotIndex + 1 : shotIndex - 1);
+    lbSwiped = true;
+  }
+  lbStartX = null;
+});
 lightbox.addEventListener('click', e => {
+  if (lbSwiped) { lbSwiped = false; return; }
   if (e.target === lightbox) closeLightbox();
 });
 document.addEventListener('keydown', e => {

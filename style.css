@@ -324,6 +324,7 @@ button:focus-visible {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--concrete-dark);
+  touch-action: pan-y; /* vertikal skroll funkar, horisontella svep byter bild */
 }
 .service-media img {
   position: absolute;
@@ -333,6 +334,35 @@ button:focus-visible {
   object-fit: cover;
   opacity: 0;
   transition: opacity .8s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  background: rgba(29, 36, 43, .55);
+  color: var(--white);
+  opacity: 0;
+  transition: opacity .2s ease, background .15s ease, color .15s ease;
+}
+.carousel-arrow.prev { left: 10px; }
+.carousel-arrow.next { right: 10px; }
+.carousel-arrow svg { width: 20px; height: 20px; }
+.service-media:hover .carousel-arrow { opacity: 1; }
+.carousel-arrow:hover { background: var(--accent); color: var(--charcoal); }
+/* På pekskärmar utan mus syns pilarna alltid */
+@media (hover: none) {
+  .carousel-arrow { opacity: .85; }
 }
 .service-media img.is-active { opacity: 1; }
 
@@ -606,7 +636,9 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   padding: 4vmin;
+  touch-action: pan-y; /* horisontella svep bläddrar mellan bilderna */
 }
+.lightbox img { user-select: none; -webkit-user-drag: none; }
 .lightbox[hidden] { display: none; }
 .lightbox img {
   max-width: 92vw;
