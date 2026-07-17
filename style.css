@@ -560,7 +560,7 @@ html.js .project { animation: project-in .35s ease; }
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
 
@@ -598,7 +598,6 @@ html.js .project { animation: project-in .35s ease; }
 .contact-icon--phone { background: var(--accent); color: var(--charcoal); }
 .contact-icon--mail  { background: var(--steel); }
 .contact-icon--insta { background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-.contact-icon--fb    { background: #1877f2; }
 
 .contact-label {
   font-family: var(--font-head);
