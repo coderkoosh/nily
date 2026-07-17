@@ -127,8 +127,38 @@ document.querySelectorAll('[data-carousel]').forEach(media => {
   });
 });
 
-// Lightbox med bläddring mellan bilderna i samma projekt
+// Kategoriflikar för Innan & efter: klicka på en kategori
+// så visas det projektets bilder
 const projects = [...document.querySelectorAll('.project')];
+if (projects.length > 1) {
+  const tabs = document.createElement('div');
+  tabs.className = 'project-tabs';
+
+  const select = i => {
+    projects.forEach((project, j) => {
+      project.hidden = j !== i;
+      if (j === i) project.classList.add('visible');
+    });
+    [...tabs.children].forEach((btn, j) => {
+      btn.classList.toggle('active', j === i);
+      btn.setAttribute('aria-pressed', j === i);
+    });
+  };
+
+  projects.forEach((project, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'project-tab';
+    btn.type = 'button';
+    btn.textContent = project.querySelector('h3').textContent;
+    btn.addEventListener('click', () => select(i));
+    tabs.appendChild(btn);
+  });
+
+  projects[0].parentElement.insertBefore(tabs, projects[0]);
+  select(0);
+}
+
+// Lightbox med bläddring mellan bilderna i samma projekt
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
