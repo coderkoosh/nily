@@ -273,32 +273,22 @@ button:focus-visible {
   50%      { transform: translate(-50%, 9px); }
 }
 
-/* ---------- Intro / värdeord ---------- */
-.intro { padding: 72px 0; background: var(--white); }
+/* ---------- Intro / om oss ---------- */
+.intro { padding: 84px 0; background: var(--white); }
 .intro-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  align-items: start;
 }
-.intro-card {
-  background: var(--concrete);
-  border-left: 5px solid var(--accent);
-  border-radius: var(--radius);
-  padding: 30px 28px;
+.intro-text h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
+.intro-copy p {
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin-bottom: 18px;
 }
-.intro-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: var(--charcoal);
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.intro-icon svg { width: 26px; height: 26px; }
-.intro-card h3 { font-size: 1.4rem; margin-bottom: 6px; }
-.intro-card p { color: var(--muted); font-size: .98rem; }
+.intro-copy p:last-child { margin-bottom: 0; }
+.intro-copy strong { color: var(--text); font-weight: 500; }
 
 /* ---------- Tjänster ---------- */
 .services-grid {
@@ -794,8 +784,7 @@ html.js .reveal.visible { opacity: 1; transform: none; }
 .contact-grid .reveal:nth-child(2),
 .intro-grid .reveal:nth-child(2) { transition-delay: .08s; }
 .services-grid .reveal:nth-child(3),
-.contact-grid .reveal:nth-child(3),
-.intro-grid .reveal:nth-child(3) { transition-delay: .16s; }
+.contact-grid .reveal:nth-child(3) { transition-delay: .16s; }
 .services-grid .reveal:nth-child(4),
 .contact-grid .reveal:nth-child(4) { transition-delay: .24s; }
 .services-grid .reveal:nth-child(5) { transition-delay: .32s; }
