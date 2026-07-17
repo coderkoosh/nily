@@ -290,20 +290,28 @@ button:focus-visible {
 .intro-copy p:last-child { margin-bottom: 0; }
 .intro-copy strong { color: var(--text); font-weight: 500; }
 
-/* Datorer: luftigare intro med större text i balanserade kolumner */
+/* Datorer: intron som en grå panel med amber-kant och balanserade kolumner */
 @media (min-width: 961px) {
-  .intro { padding: 110px 0; }
+  .intro { padding: 96px 0; }
   .intro-grid {
     grid-template-columns: 5fr 6fr;
-    gap: 84px;
+    gap: 72px;
     align-items: center;
+    background: var(--concrete);
+    border-left: 6px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 60px 68px;
   }
-  .intro-text h2 { font-size: 3rem; }
+  .intro-text h2 { font-size: 2.9rem; }
   .intro-copy p {
-    font-size: 1.15rem;
-    line-height: 1.85;
-    margin-bottom: 26px;
-    max-width: 58ch;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 22px;
+    max-width: 56ch;
+  }
+  .intro-copy p:first-child {
+    font-size: 1.22rem;
+    color: var(--text);
   }
 }
 
