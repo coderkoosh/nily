@@ -544,16 +544,6 @@ html.js .project { animation: project-in .35s ease; }
 .team-text p { color: var(--muted); margin-bottom: 18px; }
 .team-text .btn { margin-top: 6px; }
 
-/* ---------- CTA-band ---------- */
-.cta-band {
-  background: var(--steel);
-  color: var(--white);
-  text-align: center;
-}
-.cta-inner { padding: 72px 0; }
-.cta-band h2 { color: var(--white); font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 10px; }
-.cta-band p { color: #c3cad0; margin-bottom: 28px; }
-
 /* ---------- Kontakt ---------- */
 .contact .section-head { margin-inline: auto; text-align: center; }
 .contact .hazard-line { margin-inline: auto; }
@@ -669,6 +659,11 @@ html.js .project { animation: project-in .35s ease; }
   border-top: 1px solid rgba(255,255,255,.08);
   padding: 18px 0;
   font-size: .88rem;
+}
+.footer-credit {
+  margin-top: 4px;
+  font-size: .82rem;
+  color: #7d868e;
 }
 
 /* ---------- Lightbox ---------- */
