@@ -127,7 +127,38 @@ document.querySelectorAll('[data-carousel]').forEach(media => {
   });
 });
 
-// Lightbox med bläddring mellan alla projektbilder
+// Kategoriflikar för Innan & efter: klicka på en kategori
+// så visas det projektets bilder
+const projects = [...document.querySelectorAll('.project')];
+if (projects.length > 1) {
+  const tabs = document.createElement('div');
+  tabs.className = 'project-tabs';
+
+  const select = i => {
+    projects.forEach((project, j) => {
+      project.hidden = j !== i;
+      if (j === i) project.classList.add('visible');
+    });
+    [...tabs.children].forEach((btn, j) => {
+      btn.classList.toggle('active', j === i);
+      btn.setAttribute('aria-pressed', j === i);
+    });
+  };
+
+  projects.forEach((project, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'project-tab';
+    btn.type = 'button';
+    btn.textContent = project.querySelector('h3').textContent;
+    btn.addEventListener('click', () => select(i));
+    tabs.appendChild(btn);
+  });
+
+  projects[0].parentElement.insertBefore(tabs, projects[0]);
+  select(0);
+}
+
+// Lightbox med bläddring mellan bilderna i samma projekt
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
@@ -135,23 +166,29 @@ const lightboxClose = document.getElementById('lightboxClose');
 const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
 
-const allShots = [...document.querySelectorAll('.project-gallery .shot img')];
+let shots = [];
 let shotIndex = 0;
 
 function openLightbox(i) {
-  shotIndex = (i + allShots.length) % allShots.length;
-  const img = allShots[shotIndex];
+  shotIndex = (i + shots.length) % shots.length;
+  const img = shots[shotIndex];
   lightboxImg.src = img.src;
   lightboxImg.alt = img.alt;
   const badge = img.parentElement.querySelector('figcaption');
   lightboxCaption.textContent = (badge ? badge.textContent + ': ' : '') + img.alt
-    + ' · ' + (shotIndex + 1) + '/' + allShots.length;
+    + ' · ' + (shotIndex + 1) + '/' + shots.length;
   lightbox.hidden = false;
   document.body.style.overflow = 'hidden';
 }
 
-allShots.forEach((img, i) => {
-  img.parentElement.addEventListener('click', () => openLightbox(i));
+projects.forEach(project => {
+  const imgs = [...project.querySelectorAll('.shot img')];
+  imgs.forEach((img, i) => {
+    img.parentElement.addEventListener('click', () => {
+      shots = imgs;
+      openLightbox(i);
+    });
+  });
 });
 
 function closeLightbox() {
