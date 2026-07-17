@@ -410,42 +410,44 @@ button:focus-visible {
 .service-card--more .btn-dark:hover { background: #ffb23a; }
 
 /* ---------- Projekt / Innan & Efter ---------- */
-/* Varje kategori är en klickbar låda som fälls ut */
-html.js .project-head { cursor: pointer; margin-bottom: 0; }
-html.js .project.open .project-head { margin-bottom: 20px; }
-
-.project-toggle {
+/* Kategoriknappar: en kategori visas i taget */
+.project-tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
 }
-.project-chevron {
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--concrete);
+.project-tab {
+  font-family: var(--font-head);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: .98rem;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.project-tab:hover {
+  border-color: var(--accent);
   color: var(--charcoal);
-  transition: transform .25s ease, background .15s ease;
+  transform: translateY(-1px);
 }
-.project-chevron svg { width: 20px; height: 20px; }
-.project.open .project-chevron { transform: rotate(180deg); background: var(--accent); }
+.project-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--charcoal);
+}
 
-html.js .project { transition: box-shadow .2s ease; }
-html.js .project.collapsed { padding: 22px 30px; }
-html.js .project.collapsed:hover { box-shadow: 0 14px 34px rgba(29,36,43,.18); }
-html.js .project.collapsed:hover .project-chevron { background: var(--accent); }
-html.js .project.collapsed .project-head p,
-html.js .project.collapsed .project-gallery { display: none; }
-
+.project[hidden] { display: none; }
 @keyframes project-in {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }
 }
-html.js .project-gallery { animation: project-in .3s ease; }
+html.js .project { animation: project-in .35s ease; }
 
 .project {
   background: var(--white);

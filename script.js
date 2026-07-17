@@ -127,39 +127,36 @@ document.querySelectorAll('[data-carousel]').forEach(media => {
   });
 });
 
-// Innan & efter: varje kategori är en låda. Klicka på lådan
-// så fälls bilderna innan och efter ut, klicka igen så stängs den.
+// Kategoriflikar för Innan & efter: klicka på en kategori
+// så visas det projektets bilder
 const projects = [...document.querySelectorAll('.project')];
-projects.forEach(project => {
-  const head = project.querySelector('.project-head');
-  const h3 = head.querySelector('h3');
+if (projects.length > 1) {
+  const tabs = document.createElement('div');
+  tabs.className = 'project-tabs';
 
-  const row = document.createElement('div');
-  row.className = 'project-toggle';
-  head.insertBefore(row, head.firstChild);
-  row.appendChild(h3);
-
-  const chevron = document.createElement('span');
-  chevron.className = 'project-chevron';
-  chevron.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
-  row.appendChild(chevron);
-
-  project.classList.add('collapsed');
-  head.setAttribute('role', 'button');
-  head.setAttribute('tabindex', '0');
-  head.setAttribute('aria-expanded', 'false');
-
-  const toggle = () => {
-    const open = !project.classList.contains('open');
-    project.classList.toggle('open', open);
-    project.classList.toggle('collapsed', !open);
-    head.setAttribute('aria-expanded', open);
+  const select = i => {
+    projects.forEach((project, j) => {
+      project.hidden = j !== i;
+      if (j === i) project.classList.add('visible');
+    });
+    [...tabs.children].forEach((btn, j) => {
+      btn.classList.toggle('active', j === i);
+      btn.setAttribute('aria-pressed', j === i);
+    });
   };
-  head.addEventListener('click', toggle);
-  head.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+
+  projects.forEach((project, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'project-tab';
+    btn.type = 'button';
+    btn.textContent = project.querySelector('h3').textContent;
+    btn.addEventListener('click', () => select(i));
+    tabs.appendChild(btn);
   });
-});
+
+  projects[0].parentElement.insertBefore(tabs, projects[0]);
+  select(0);
+}
 
 // Lightbox med bläddring mellan bilderna i samma projekt
 const lightbox = document.getElementById('lightbox');
