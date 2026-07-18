@@ -542,7 +542,6 @@ html.js .project { animation: project-in .35s ease; }
 .team-photo img { width: 100%; height: auto; filter: grayscale(1) contrast(1.05); }
 .team-text h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
 .team-text p { color: var(--muted); margin-bottom: 18px; }
-.team-text .btn { margin-top: 6px; }
 
 /* ---------- Kontakt ---------- */
 .contact .section-head { margin-inline: auto; text-align: center; }
