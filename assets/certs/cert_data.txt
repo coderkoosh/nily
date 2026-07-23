@@ -1,0 +1,28 @@
+Rule: If no link or logo is present for an entry, use the placeholder image and placeholder link below.
+placeholder link: placeholder.jveloper.com
+placeholder image: placeholder.png
+
+irse.png: {
+  link: https://irse.se/utbildningar/arbete-pa-tak
+  text: Certifierade för arbete på tak.
+}
+
+konsumentverket.svg: {
+  link: https://www.konsumentverket.se
+  text: Vi följer Konsumentverkets riktlinjer och byggjuridik.
+}
+
+byggkeramikradet.png: {
+  link: https://www.bkr.se/om-behorighet/vad-ar-behorighet
+  text: Vi har gått utbildning hos Byggkeramikrådet och arbetar efter BBV, Byggkeramikrådets branschregler för våtrum.
+}
+
+byggkeramikradet.png: {
+  link: https://www.bkr.se/regler
+  text: Vi har gått utbildning hos Byggkeramikrådet gällande juridiska regler för våtrum.
+}
+
+placeholder.png: {
+  link: placeholder.jveloper.com
+  text: Vi har certifikat inom VVS (Sanitet – service och reparationer). [Väntar på bekräftelse från kund om utfärdare/länk]
+}
